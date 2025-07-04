@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import type { PortfolioData } from "@/lib/data";
 import SplineScene from "./spline-scene";
 
@@ -24,40 +23,6 @@ export default function UnifiedPortfolio({ data }: UnifiedPortfolioProps) {
     contact,
     cvUrl,
   } = data;
-
-  // Track which section is active for background changing
-  const [activeSection, setActiveSection] = useState<string>("hero");
-
-  useEffect(() => {
-    const observers = new Map();
-    const sections = ["hero", "about", "experience", "skills", "projects", "contact"];
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.id;
-          setActiveSection(sectionId);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.3,
-      rootMargin: "-10% 0px -10% 0px",
-    });
-
-    sections.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
-        observers.set(sectionId, observer);
-      }
-    });
-
-    return () => {
-      observers.forEach((obs) => obs.disconnect());
-    };
-  }, []);
 
   // Animation variants
   const containerVariants = {
