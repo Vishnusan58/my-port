@@ -64,7 +64,7 @@ export const portfolioData: PortfolioData = {
     "Hello! I&apos;m <span class=\"font-semibold\">Vishnu S</span>, a passionate AI and Data Science enthusiast based in Chennai. My journey involves exploring the depths of Large Language Models (LLMs), vector databases, and advanced AI techniques to build intelligent and impactful solutions.",
     "I thrive on transforming complex data into actionable insights and developing cutting-edge applications that leverage the power of Artificial Intelligence."
   ],
-  cvUrl: "/Vishnu_S_Resume.pdf", // Updated to point to actual resume file
+  cvUrl: "https://drive.google.com/file/d/1JwcxJTMEpQTr0JPWtBLhVCbXl22U6-H9/view?usp=sharing", // Updated to point to actual resume file
   contact: [
     { icon: Linkedin, label: "LinkedIn", value: "Vishnu S", href: "https://www.linkedin.com/in/vishnu-s-85b258217/" }, // Replace with actual LinkedIn URL
     { icon: Phone, label: "Phone", value: "9360562951", href: "tel:+919360562951" },
