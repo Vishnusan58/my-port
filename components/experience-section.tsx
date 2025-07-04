@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import type { PortfolioData } from "@/lib/data"
+import SplineScene from "@/components/spline-scene"
 
 interface ExperienceSectionProps {
   data: PortfolioData
@@ -26,8 +27,17 @@ export default function ExperienceSection({ data }: ExperienceSectionProps) {
   }
 
   return (
-    <section id="experience" className="min-h-screen w-full py-20 flex items-center justify-center bg-black text-white">
-      <div className="max-w-4xl mx-auto px-4 text-center">
+    <section id="experience" className="relative min-h-screen w-full py-20 flex items-center justify-center overflow-hidden">
+      {/* Full-screen Spline background */}
+      <SplineScene
+        scene="https://prod.spline.design/PBQQBw8bfXDhBo7w/scene.splinecode"
+        className="absolute inset-0"
+        style={{ opacity: 1 }}
+      />
+      {/* Dark overlay for contrast */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      {/* Content overlay */}
+      <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -46,15 +56,13 @@ export default function ExperienceSection({ data }: ExperienceSectionProps) {
           className="space-y-12"
         >
           {professionalExperience.map((exp, index) => (
-            <motion.div key={index} variants={itemVariants} className="bg-gray-900 p-8 rounded-lg shadow-lg text-left">
-              <h3 className="text-3xl font-bold mb-2">{exp.role}</h3>
-              <p className="text-xl text-gray-300 mb-1">{exp.company}</p>
-              <p className="text-lg text-gray-400 mb-4">
-                {exp.duration} | {exp.location}
-              </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-200 text-lg">
+            <motion.div key={index} variants={itemVariants} className="bg-white/10 backdrop-blur-sm border border-white/20 p-8 rounded-lg shadow-lg text-left hover:bg-white/20 transition-all duration-300">
+              <h3 className="text-3xl font-bold mb-2 text-white">{exp.role}</h3>
+              <p className="text-xl text-white/90 mb-1">{exp.company}</p>
+              <p className="text-lg text-white/70 mb-4">{exp.duration} | {exp.location}</p>
+              <ul className="list-disc list-inside space-y-2 text-white/90">
                 {exp.description.map((desc, i) => (
-                  <li key={i}>{desc}</li>
+                  <li key={i} className="text-sm leading-relaxed">{desc}</li>
                 ))}
               </ul>
             </motion.div>

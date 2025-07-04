@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import type { PortfolioData } from "@/lib/data"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import Image from "next/image" // Import Image component
+import Image from "next/image"
+import SplineScene from "@/components/spline-scene"
 
 interface ProjectsSectionProps {
   data: PortfolioData
@@ -28,8 +29,17 @@ export default function ProjectsSection({ data }: ProjectsSectionProps) {
   }
 
   return (
-    <section id="projects" className="min-h-screen w-full py-20 flex items-center justify-center bg-white text-black">
-      <div className="max-w-6xl mx-auto px-4 text-center">
+    <section id="projects" className="relative min-h-screen w-full py-20 flex items-center justify-center overflow-hidden">
+      {/* Full-screen Spline background */}
+      <SplineScene
+        scene="https://prod.spline.design/Sjj7TaP7KI7zAN-m/scene.splinecode"
+        className="absolute inset-0"
+        style={{ opacity: 1 }}
+      />
+      {/* Dark overlay for contrast */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      {/* Content overlay */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4 text-center text-white">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,31 +59,30 @@ export default function ProjectsSection({ data }: ProjectsSectionProps) {
         >
           {projects.map((project, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <Card className="h-full flex flex-col justify-between border-gray-300 overflow-hidden group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div className="relative w-full h-48 overflow-hidden">
-                  <Image
-                    src={project.imageUrl || "/placeholder.svg"}
-                    alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
+              <Card className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 text-white">
                 <CardHeader>
-                  <CardTitle className="text-2xl font-bold">{project.title}</CardTitle>
-                  <p className="text-md text-gray-600">
-                    {project.category} | {project.duration}
-                  </p>
+                  {/*<Image*/}
+                  {/*  src={project.imageUrl}*/}
+                  {/*  alt={project.title}*/}
+                  {/*  width={400}*/}
+                  {/*  height={200}*/}
+                  {/*  className="w-full h-48 object-cover rounded-t-lg"*/}
+                  {/*/>*/}
+                  <CardTitle className="text-xl font-bold text-white">{project.title}</CardTitle>
+                  <p className="text-sm text-white/70">{project.category} | {project.duration}</p>
                 </CardHeader>
-                <CardContent className="flex-grow">
-                  <ul className="list-disc list-inside space-y-2 text-left text-gray-800 text-lg mb-4">
+                <CardContent>
+                  <div className="space-y-4">
                     {project.description.map((desc, i) => (
-                      <li key={i}>{desc}</li>
+                      <p key={i} className="text-sm text-white/90 leading-relaxed">{desc}</p>
                     ))}
-                  </ul>
-                  <div className="mt-auto pt-4 border-t border-gray-200">
-                    <p className="text-sm font-semibold text-gray-700">Technologies:</p>
-                    <p className="text-sm text-gray-600">{project.technologies.join(", ")}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech, i) => (
+                        <span key={i} className="bg-white/20 px-2 py-1 rounded text-xs text-white/90">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
               </Card>

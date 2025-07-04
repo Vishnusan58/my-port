@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import type { PortfolioData } from "@/lib/data"
 import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button" // Import Button
+import { Button } from "@/components/ui/button"
+import SplineScene from "@/components/spline-scene"
 
 interface ContactSectionProps {
   data: PortfolioData
@@ -28,8 +29,17 @@ export default function ContactSection({ data }: ContactSectionProps) {
   }
 
   return (
-    <section id="contact" className="min-h-screen w-full py-20 flex items-center justify-center bg-white text-black">
-      <div className="max-w-4xl mx-auto px-4 text-center">
+    <section id="contact" className="relative min-h-screen w-full py-20 flex items-center justify-center overflow-hidden">
+      {/* Full-screen Spline background */}
+      <SplineScene
+        scene="https://prod.spline.design/tJ8iMUOzO6VssVjL/scene.splinecode"
+        className="absolute inset-0"
+        style={{ opacity: 1 }}
+      />
+      {/* Dark overlay for contrast */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      {/* Content overlay */}
+      <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,22 +59,21 @@ export default function ContactSection({ data }: ContactSectionProps) {
         >
           {contact.map((item, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <Card className="h-full border-gray-300 hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <item.icon className="h-10 w-10 mb-4 text-gray-800" />
-                  <p className="text-xl font-semibold mb-2">{item.label}</p>
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-lg text-gray-700 hover:underline"
-                    >
-                      {item.value}
-                    </a>
-                  ) : (
-                    <p className="text-lg text-gray-700">{item.value}</p>
-                  )}
+              <Card className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 text-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center space-x-4">
+                    <item.icon className="w-8 h-8 text-white" />
+                    <div className="text-left">
+                      <h3 className="text-lg font-semibold text-white">{item.label}</h3>
+                      {item.href ? (
+                        <a href={item.href} className="text-white/90 hover:text-white transition-colors">
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className="text-white/90">{item.value}</p>
+                      )}
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -75,15 +84,15 @@ export default function ContactSection({ data }: ContactSectionProps) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-12"
         >
           <Button
             asChild
-            className="rounded-full px-8 py-6 text-lg bg-black text-white hover:bg-gray-800 transition-colors duration-300"
+            className="bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white px-8 py-3 text-lg font-semibold"
           >
             <a href={cvUrl} target="_blank" rel="noopener noreferrer">
-              Download My CV
+              Download CV
             </a>
           </Button>
         </motion.div>

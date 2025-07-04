@@ -32,7 +32,7 @@ export type Project = {
   duration: string
   description: string[]
   technologies: string[]
-  imageUrl: string // Added imageUrl for projects
+  // imageUrl: string // Added imageUrl for projects
 }
 
 export type Certification = string
@@ -43,6 +43,8 @@ export type PortfolioData = {
   name: string
   tagline: string
   profilePicture: string // Added profilePicture
+  aboutHeading?: string // Added for About section heading
+  aboutContent?: string[] // Added for About section content
   contact: ContactInfo[]
   education: Education[]
   coreCompetencies: CoreCompetency[]
@@ -57,12 +59,17 @@ export const portfolioData: PortfolioData = {
   name: "Vishnu S",
   tagline: "AI & Data Science Enthusiast | Building Intelligent Solutions",
   profilePicture: "/placeholder.svg?height=400&width=400", // Placeholder profile picture
-  cvUrl: "/placeholder.pdf", // Placeholder CV URL
+  aboutHeading: "About Me", // Added heading
+  aboutContent: [
+    "Hello! I&apos;m <span class=\"font-semibold\">Vishnu S</span>, a passionate AI and Data Science enthusiast based in Chennai. My journey involves exploring the depths of Large Language Models (LLMs), vector databases, and advanced AI techniques to build intelligent and impactful solutions.",
+    "I thrive on transforming complex data into actionable insights and developing cutting-edge applications that leverage the power of Artificial Intelligence."
+  ],
+  cvUrl: "/Vishnu_S_Resume.pdf", // Updated to point to actual resume file
   contact: [
-    { icon: Linkedin, label: "LinkedIn", value: "Vishnu S", href: "https://www.linkedin.com/in/your-linkedin-profile" }, // Replace with actual LinkedIn URL
+    { icon: Linkedin, label: "LinkedIn", value: "Vishnu S", href: "https://www.linkedin.com/in/vishnu-s-85b258217/" }, // Replace with actual LinkedIn URL
     { icon: Phone, label: "Phone", value: "9360562951", href: "tel:+919360562951" },
     { icon: Mail, label: "Email", value: "vishnusankar058@gmail.com", href: "mailto:vishnusankar058@gmail.com" },
-    { icon: Github, label: "GitHub", value: "your-github-username", href: "https://github.com/your-github-username" }, // Replace with actual GitHub URL
+    { icon: Github, label: "GitHub", value: "vishnu-san", href: "https://github.com/Vishnusan58/" }, // Replace with actual GitHub URL
   ],
   education: [
     {
@@ -111,7 +118,7 @@ export const portfolioData: PortfolioData = {
         "Implemented context-aware query refinement and insurance-specific utility modules to improve accuracy and domain relevance of chatbot responses.",
       ],
       technologies: ["Google Gemini API", "Pinecone", "Azure Cosmos DB", "MongoDB"],
-      imageUrl: "/placeholder.svg?height=400&width=600", // Placeholder image for project
+      // imageUrl: "/placeholder.svg?height=400&width=600", // Placeholder image for project
     },
     {
       title: "Advanced Crack Detection System",
@@ -122,7 +129,7 @@ export const portfolioData: PortfolioData = {
         "Engineered real-time processing pipeline to optimize inference speed, resulting in reduced processing time.",
       ],
       technologies: ["OpenCV", "Python"],
-      imageUrl: "/placeholder.svg?height=400&width=600", // Placeholder image for project
+      // imageUrl: "/placeholder.svg?height=400&width=600", // Placeholder image for project
     },
     {
       title: "Skin Cancer Detection with Multi-Input Deep Learning Model",
@@ -144,7 +151,7 @@ export const portfolioData: PortfolioData = {
         "Matplotlib",
         "HDF5",
       ],
-      imageUrl: "/placeholder.svg?height=400&width=600", // Placeholder image for project
+      // imageUrl: "/placeholder.svg?height=400&width=600", // Placeholder image for project
     },
   ],
   certifications: [
